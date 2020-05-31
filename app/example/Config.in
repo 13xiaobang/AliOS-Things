@@ -35,6 +35,12 @@ if AOS_APP_BLEPERIPHERAL
         default "bluetooth.bleperipheral"
 endif
 
+source "app/example/bluetooth/blebanddemo/Config.in"
+if AOS_APP_BLEBANDDEMO
+    config AOS_BUILD_APP
+	    default "bluetooth.blebanddemo"
+endif
+
 source "app/example/bluetooth/breezeapp/Config.in"
 if AOS_APP_BREEZEAPP
     config AOS_BUILD_APP

@@ -514,6 +514,20 @@ struct bt_uuid_128 {
 #define BT_UUID_MCAP_CTRL_VAL             0x001e
 #define BT_UUID_MCAP_DATA                 BT_UUID_DECLARE_16(0x001f)
 #define BT_UUID_MCAP_DATA_VAL             0x001f
+#define BT_UUID_PRIV_DATA                 BT_UUID_DECLARE_16(0xfff0)
+#define BT_UUID_PRIV_DATA_VAL             0xfff0
+
+#define BT_UUID_PRIV_CHW_DATA             BT_UUID_DECLARE_16(0xfff1)
+#define BT_UUID_PRIV_CHW_DATA_VAL         0xfff1
+
+#define BT_UUID_PRIV_CHR_DATA             BT_UUID_DECLARE_16(0xfff2)
+#define BT_UUID_PRIV_CHR_DATA_VAL         0xfff2
+
+#define BT_UUID_PRIV_CHN_DATA             BT_UUID_DECLARE_16(0xfff3)
+#define BT_UUID_PRIV_CHN_DATA_VAL         0xfff3
+
+
+
 #define BT_UUID_L2CAP                     BT_UUID_DECLARE_16(0x0100)
 #define BT_UUID_L2CAP_VAL                 0x0100
 

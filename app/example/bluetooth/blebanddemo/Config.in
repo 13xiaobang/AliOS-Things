@@ -1,0 +1,11 @@
+config AOS_APP_BLEBANDDEMO
+    bool "BLE Band Demo Peripheral Role Sample"
+    select AOS_COMP_BT_HOST
+    select AOS_COMP_BT_PROFILE
+    select AOS_COMP_CLI
+    help
+        ble peripheral sample
+
+if AOS_APP_BLEBANDDEMO
+# Configurations for BLE Band bleperipheral
+endif

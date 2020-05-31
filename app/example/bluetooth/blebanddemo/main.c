@@ -29,11 +29,9 @@
 #include <bluetooth/uuid.h>
 #include <bluetooth/gatt.h>
 
-#include "hrs.h"
-#include "bas.h"
-#include "dis.h"
+#include "priv.h"
 
-#define DEVICE_NAME	"AOS-BLE-PERIPHERAL"
+#define DEVICE_NAME	"BLEDEMO"
 #define DEVICE_NAME_LEN	(sizeof(DEVICE_NAME) - 1)
 
 extern int hci_driver_init();
@@ -63,7 +61,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
 	printf("Connected %s\n", addr);
 
 #ifdef CONFIG_BT_SMP
-	if (bt_conn_security(conn, BT_SECURITY_MEDIUM)) {
+	if (bt_conn_security(conn, BT_SECURITY_NONE)) {
 		printf("Failed to set security\n");
 	}
 #endif
@@ -115,20 +113,16 @@ static struct bt_conn_cb conn_callbacks = {
 #endif
 };
 
-
 static void bt_ready(int err)
 {
         if (err) {
-                printf("1Bluetooth init failed (err %d)\n", err);
+                printf("Bluetooth init failed (err %d)\n", err);
                 return;
         }
 
         printf("Bluetooth initialized\n");
 
-        hrs_init(0x01);
-        bas_init();
-		priv_init(0x2);
-        dis_init("AOS_BLE_MODEL", "Manufacturer");
+	priv_init(0x0);
 
         err = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad),
                               sd, ARRAY_SIZE(sd));
@@ -164,7 +158,6 @@ static struct bt_conn_auth_cb auth_cb_display = {
 	.cancel = auth_cancel,
 };
 
-
 extern int hci_driver_init();
 void ble_sample(void)
 {
@@ -178,15 +171,13 @@ void ble_sample(void)
     }
 
 #ifdef CONFIG_BT_SMP
-    bt_conn_auth_cb_register(&auth_cb_display);
+    //bt_conn_auth_cb_register(&auth_cb_display);
 #endif
     bt_conn_cb_register(&conn_callbacks);
 
     while (1) {
         aos_msleep(1000);
-        hrs_notify();
-        bas_notify();
-		priv_notify();
+	priv_notify();
     }
 
     printf("Advertising successfully started\n");
